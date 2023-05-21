@@ -1,0 +1,20 @@
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    grid-auto-flow: dense;
+
+}
+
+.ingredient-group {
+    padding: 10px;
+    background-color: antiquewhite;
+}
+.validationError{
+    color: red;
+}
+
+button{
+    margin: 8px 0px;
+}
