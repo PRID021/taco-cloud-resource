@@ -12,13 +12,14 @@ import sia.tacocloud.models.Ingredient.Type;
 import sia.tacocloud.utils.ConfigReader;
 
 @Configuration
-public class AppConfig {
+public class AppConfig implements CommandLineRunner {
     public static String getCreditCard() throws IOException {
         return ConfigReader.getValueByKey("creditCard");
     }
+
     @Bean
-    public CommandLineRunner dataLoader(IngredientRepository repo){
-        return args->{
+    public CommandLineRunner dataLoader(IngredientRepository repo) {
+        return args -> {
             repo.save(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
             repo.save(new Ingredient("COTO", "Corn Tortilla", Type.WRAP));
             repo.save(new Ingredient("GRBF", "Ground Beef", Type.PROTEIN));
@@ -31,5 +32,9 @@ public class AppConfig {
             repo.save(new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
         };
 
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
     }
 }
