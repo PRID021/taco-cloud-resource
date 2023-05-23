@@ -13,8 +13,12 @@ import sia.tacocloud.utils.ConfigReader;
 
 @Configuration
 public class AppConfig implements CommandLineRunner {
-    public static String getCreditCard() throws IOException {
-        return ConfigReader.getValueByKey("creditCard");
+    public static String getCreditCard()  {
+        try {
+            return ConfigReader.getValueByKey("creditCard");
+        } catch (IOException e) {
+            return "0000000000000000";
+        }
     }
 
     @Bean
@@ -36,5 +40,6 @@ public class AppConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
     }
 }

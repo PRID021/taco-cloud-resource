@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
-// import org.springframework.data.annotation.Id;
-// import org.springframework.data.relational.core.mapping.Table;
+
 
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
