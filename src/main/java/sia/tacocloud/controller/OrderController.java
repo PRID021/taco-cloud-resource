@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -21,7 +20,7 @@ import jakarta.validation.ValidatorFactory;
 import sia.tacocloud.AppConfig;
 import sia.tacocloud.data.OrderRepository;
 import sia.tacocloud.models.TacoOrder;
-import sia.tacocloud.utils.ConfigReader;
+
 
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
