@@ -27,7 +27,6 @@ import sia.tacocloud.models.Ingredient.Type;
 public class DesignTacoController {
     private final IngredientRepository ingredientRepository;
 
-    @Autowired
     public DesignTacoController(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
     }
@@ -57,13 +56,15 @@ public class DesignTacoController {
     }
 
     private Iterable<Ingredient> filterByType(Iterable<Ingredient> ingredients, Type type) {
-        List<Ingredient> listIngredient = StreamSupport.stream(ingredients.spliterator(), false).collect(Collectors.toList());
+        List<Ingredient> listIngredient = StreamSupport.stream(ingredients.spliterator(), false)
+                .collect(Collectors.toList());
         return listIngredient.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
     }
 
     @PostMapping
     public String processTaco(@Valid Taco taco, Errors errors, @ModelAttribute TacoOrder tacoOrder) {
         if (errors.hasErrors()) {
+            log.error("Error processing taco: {}", errors);
             return "design";
         }
 

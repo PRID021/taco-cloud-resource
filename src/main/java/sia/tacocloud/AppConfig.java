@@ -6,14 +6,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import lombok.extern.slf4j.Slf4j;
 import sia.tacocloud.data.IngredientRepository;
 import sia.tacocloud.models.Ingredient;
 import sia.tacocloud.models.Ingredient.Type;
 import sia.tacocloud.utils.ConfigReader;
 
+@Slf4j
 @Configuration
 public class AppConfig implements CommandLineRunner {
-    public static String getCreditCard()  {
+    public static String getCreditCard() {
         try {
             return ConfigReader.getValueByKey("creditCard");
         } catch (IOException e) {
@@ -23,6 +25,13 @@ public class AppConfig implements CommandLineRunner {
 
     @Bean
     public CommandLineRunner dataLoader(IngredientRepository repo) {
+        Iterable<Ingredient> ingredients = repo.findAll();
+        if (ingredients.iterator().hasNext()) {
+            log.info("Ingredients already loaded");
+            log.warn("Perform delete {}", ingredients);
+            repo.deleteAll();
+        }
+
         return args -> {
             repo.save(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
             repo.save(new Ingredient("COTO", "Corn Tortilla", Type.WRAP));
