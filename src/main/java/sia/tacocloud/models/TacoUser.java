@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -19,10 +20,11 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
-public class User implements UserDetails {
+public class TacoUser implements UserDetails {
     private static final long serialVersionUID = 1L;
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
     private Long id;
 
     private final String username;
@@ -32,13 +34,12 @@ public class User implements UserDetails {
     private final String city;
     private final String state;
     private final String zip;
-    private final String phoneNumber;
+    private final String phonember;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
-
 
     @Override
     public boolean isAccountNonExpired() {

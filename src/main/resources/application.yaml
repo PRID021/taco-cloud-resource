@@ -9,8 +9,10 @@ spring:
   #   schema-action: RECREATE
   #   port: 9042
   #   local-datacenter: datacenter1
+
+
   data:
     mongodb:
       host: localhost
       port: 27017
-      database: tacocloudW
+      database: tacocloud

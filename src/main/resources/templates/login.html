@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TacoCloud - Login</title>
+</head>
+
+<body>
+    <h1>Login</h1>
+    <img th:src="@{/images/TacoCloud.jpg}" width="150" />
+
+    <p>New here? Click <a th:href="@{/register}">here</a> to register</p>
+    <form method="POST" th:action="@{/login}" id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" autofocus="autofocus" required="required" />
+        <br />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required="required" />
+        <br />
+        <input type="submit" value="login" />
+    </form>
+    <br />
+    <div th:if="${error}">
+        Unable tp login. Check your username and password.
+    </div>
+</body>
+
+</html>
