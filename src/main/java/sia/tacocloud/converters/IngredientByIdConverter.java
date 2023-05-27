@@ -2,8 +2,9 @@ package sia.tacocloud.converters;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import sia.tacocloud.data.IngredientRepository;
+
 import sia.tacocloud.models.Ingredient;
+import sia.tacocloud.repositories.IngredientRepository;
 
 
 @Component

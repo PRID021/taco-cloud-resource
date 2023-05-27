@@ -13,11 +13,11 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.extern.slf4j.Slf4j;
-import sia.tacocloud.data.IngredientRepository;
 import sia.tacocloud.models.Ingredient;
 import sia.tacocloud.models.Taco;
 import sia.tacocloud.models.TacoOrder;
 import sia.tacocloud.models.Ingredient.Type;
+import sia.tacocloud.repositories.IngredientRepository;
 
 @Slf4j
 @Controller

@@ -1,4 +1,4 @@
-package sia.tacocloud.data;
+package sia.tacocloud.services;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

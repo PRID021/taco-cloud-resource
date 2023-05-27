@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import lombok.extern.slf4j.Slf4j;
-import sia.tacocloud.data.IngredientRepository;
 import sia.tacocloud.models.Ingredient;
 import sia.tacocloud.models.Ingredient.Type;
+import sia.tacocloud.repositories.IngredientRepository;
 import sia.tacocloud.utils.ConfigReader;
 
 @Slf4j
