@@ -10,20 +10,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import lombok.extern.slf4j.Slf4j;
 import sia.tacocloud.models.TacoUser;
 import sia.tacocloud.repositories.UserRepository;
 
 @Configuration
-public class SecurityConfig   {
+@Slf4j
+public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -35,8 +34,8 @@ public class SecurityConfig   {
                         .loginProcessingUrl("/authenticate")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/design", true))
-                .passwordManagement((management) -> management.changePasswordPage("/update-password"))
+                        .defaultSuccessUrl("/design")
+                        )
                 .build();
     }
 
@@ -55,7 +54,9 @@ public class SecurityConfig   {
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepo) {
         return username -> {
+            log.error("Find user: " + username);
             TacoUser user = userRepo.findByUsername(username);
+            log.error("Result find user: " + user);
             if (user != null) {
                 return user;
             }

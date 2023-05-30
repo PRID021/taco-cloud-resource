@@ -13,14 +13,14 @@
     <img th:src="@{/images/TacoCloud.jpg}" width="150" />
 
     <p>New here? Click <a th:href="@{/register}">here</a> to register</p>
-    <form method="POST" th:action="@{/authenticate}" id="loginForm">
+    <form method="POST" th:action="@{/authenticate}" id="loginForm" th:object="${loginModel}">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" autofocus="autofocus" required="required" />
         <br />
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required="required" />
         <br />
-        <input type="submit" value="login" />
+        <input type="submit" value="Login" />
     </form>
     <br />
     <div th:if="${error}">
