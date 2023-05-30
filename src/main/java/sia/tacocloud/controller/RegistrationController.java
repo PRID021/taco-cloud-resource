@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
+import sia.tacocloud.models.RegistrationForm;
 import sia.tacocloud.models.TacoUser;
 import sia.tacocloud.repositories.UserRepository;
 

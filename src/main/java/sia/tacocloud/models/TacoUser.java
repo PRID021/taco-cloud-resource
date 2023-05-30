@@ -34,7 +34,7 @@ public class TacoUser implements UserDetails {
     private final String city;
     private final String state;
     private final String zip;
-    private final String phonember;
+    private final String phonenumber;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
