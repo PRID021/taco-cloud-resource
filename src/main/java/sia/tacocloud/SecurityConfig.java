@@ -23,9 +23,15 @@ import sia.tacocloud.repositories.UserRepository;
 @Configuration
 @Slf4j
 public class SecurityConfig {
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
+
+        // csrf().disable() - For an unexpected error (type=Forbidden,
+        // status=403).Forbiden
+        // when perform POST request to /design or /orders
+
+        return http.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/design", "/orders").hasRole("USER")
                 .requestMatchers("/", "/**").permitAll()
@@ -34,8 +40,7 @@ public class SecurityConfig {
                         .loginProcessingUrl("/authenticate")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/design")
-                        )
+                        .defaultSuccessUrl("/loginSuccess"))
                 .build();
     }
 
