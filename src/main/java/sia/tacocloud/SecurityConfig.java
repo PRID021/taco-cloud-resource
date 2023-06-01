@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,20 +19,23 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import lombok.extern.slf4j.Slf4j;
 import sia.tacocloud.models.TacoUser;
+import sia.tacocloud.repositories.OrderAdminService;
+import sia.tacocloud.repositories.OrderRepository;
 import sia.tacocloud.repositories.UserRepository;
 
 @Configuration
 @Slf4j
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         // csrf().disable() - For an unexpected error (type=Forbidden,
-        // status=403).Forbiden
+        // status=403).Forbidden
         // when perform POST request to /design or /orders
 
-        return http.csrf().disable()
+        return http
                 .authorizeHttpRequests()
                 .requestMatchers("/design", "/orders").hasRole("USER")
                 .requestMatchers("/", "/**").permitAll()
@@ -67,6 +71,11 @@ public class SecurityConfig {
             }
             throw new UsernameNotFoundException("User '" + username + "' not found");
         };
+    }
+
+    @Bean
+    public OrderAdminService orderAdminService(OrderRepository orderRepo) {
+        return orderRepo::deleteAll;
     }
 
 }

@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Date;
 import java.util.Set;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.ValidatorFactory;
 import sia.tacocloud.AppConfig;
 import sia.tacocloud.models.TacoOrder;
+import sia.tacocloud.models.TacoUser;
 import sia.tacocloud.repositories.OrderRepository;
 
 import org.springframework.validation.BindingResult;
@@ -36,7 +38,13 @@ public class OrderController {
     }
 
     @GetMapping("/current")
-    public String orderForm() {
+    public String orderForm(TacoOrder tacoOrder, @AuthenticationPrincipal TacoUser user) {
+        tacoOrder.setDeliveryStreet(user.getStreet());
+        tacoOrder.setDeliveryCity(user.getCity());
+        tacoOrder.setDeliveryState(user.getState());
+        tacoOrder.setDeliveryZip(user.getZip());
+        tacoOrder.setCcNumber(AppConfig.getCreditCard());
+        tacoOrder.setDeliveryName(user.getFullname());
         return "orderForm";
     }
 
