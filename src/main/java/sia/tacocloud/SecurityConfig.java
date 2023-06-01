@@ -31,9 +31,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        // csrf().disable() - For an unexpected error (type=Forbidden,
-        // status=403).Forbidden
-        // when perform POST request to /design or /orders
+        /*
+         * csrf().disable() - For an unexpected error (type=Forbidden, status=403) - Forbidden
+         * when perform POST request to /design or /orders.
+         * By default, Spring Security will protect against CRSF attacks by requiring a
+         * CSRF token to be sent with every request that could be processed by a
+         * browser. If you’re using Thymeleaf, Spring Security automatically includes a
+         * CSRF token in the model for any page that includes a form tag.
+         */
 
         return http
                 .authorizeHttpRequests()

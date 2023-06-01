@@ -48,8 +48,14 @@ public class OrderController {
         return "orderForm";
     }
 
+    /*
+     * If we annotate the TacoOrder parameter with @Valid, Spring MVC will
+     * automatically perform validation on the submitted TacoOrder object after
+     * binding it to the submitted form data.
+     * Below is the way to perform manual validation
+     */
     @PostMapping
-    public String processOrder(@Valid TacoOrder order, BindingResult result, SessionStatus sessionStatus) {
+    public String processOrder(TacoOrder order, BindingResult result, SessionStatus sessionStatus) {
         log.info("order info after validation: {}", order);
 
         // Manually modify the TacoOrder object before validation
