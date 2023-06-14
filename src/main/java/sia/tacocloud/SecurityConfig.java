@@ -32,7 +32,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         /*
-         * csrf().disable() - For an unexpected error (type=Forbidden, status=403) - Forbidden
+         * csrf().disable() - For an unexpected error (type=Forbidden, status=403) -
+         * Forbidden
          * when perform POST request to /design or /orders.
          * By default, Spring Security will protect against CRSF attacks by requiring a
          * CSRF token to be sent with every request that could be processed by a
@@ -42,9 +43,10 @@ public class SecurityConfig {
 
         return http
                 .authorizeHttpRequests()
-                .requestMatchers("/design", "/orders").hasRole("USER")
+                .requestMatchers("/design", "/orders", "/").hasRole("USER")
                 .requestMatchers("/", "/**").permitAll()
                 .and()
+                .logout(logout -> logout.logoutSuccessUrl("/"))
                 .formLogin(login -> login.loginPage("/login")
                         .loginProcessingUrl("/authenticate")
                         .usernameParameter("username")

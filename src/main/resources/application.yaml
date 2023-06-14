@@ -10,9 +10,56 @@ spring:
   #   port: 9042
   #   local-datacenter: datacenter1
 
-
   data:
     mongodb:
       host: localhost
       port: 27017
       database: tacocloud
+  datasource:
+    url: jdbc:sqlserver://localhost:14033;databaseName=tacocloud;encrypt=false;
+    username: sa
+    password: hoang92Taco
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  # In Spring Data JPA, when you define a repository interface that extends CrudRepository or one of its sub-interfaces,
+  # such as JpaRepository, it provides the necessary functionality to interact with the corresponding database table.
+  # In your case, if you have configured Spring Data JPA correctly and provided the necessary database connection details
+  # in your application's configuration, Spring Data JPA will attempt to create the necessary table in the SQL Server database
+  # when the application starts up.
+  # The table creation will be based on the entity class (TacoUser in your case) and its annotations,
+  #  such as @Entity, @Table, and the column mapping annotations (@Id, @Column, etc.).
+  # However, automatic table creation is only enabled if you have set the appropriate property in your Spring Boot configuration.
+  #  By default, Spring Boot uses Hibernate as the JPA provider, and the automatic table creation feature is controlled
+  # by the spring.jpa.hibernate.ddl-auto property.
+  # To enable automatic table creation, you can set the spring.jpa.hibernate.ddl-auto property to one of the following values:
+  # create: Hibernate will attempt to create the necessary tables. If the tables already exist,
+  #  it will drop them and recreate them.
+  # create-drop: Similar to create, but it will drop the tables when the application shuts down.
+  # update: Hibernate will update the existing tables if any changes are detected. It will not drop and recreate the tables.
+  # validate: Hibernate will validate the tables' schema against the entity mappings,but it will not create or update the tables.
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 4443
+  ssl:
+    enabled: false
+    key-store: file:///G:\WorkingPlace\taco_cloud\taco-cloud\mykeys.jks
+    key-store-password: hoang92Taco
+    key-password: hoang92Taco
+    key-alias: tomcat
+logging:
+  level:
+    root: WARN
+    org:
+      springframework:
+        security: DEBUG
+  file:
+    name: taco-cloud.log
+    path: G:\WorkingPlace\taco_cloud\taco-cloud\logs
+
+taco:
+  orders:
+    pageSize: 20

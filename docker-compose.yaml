@@ -1,0 +1,12 @@
+version: "1.0.0"
+
+services:
+  database:
+    restart: always
+    image: mcr.microsoft.com/mssql/server
+    container_name: taco-database
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=hoang92Taco
+    ports:
+      - 14033:1433
