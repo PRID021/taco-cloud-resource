@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 import sia.tacocloud.models.Ingredient;
 import sia.tacocloud.repositories.IngredientRepository;
 
-
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
 
     private IngredientRepository ingredientRepository;
-    public  IngredientByIdConverter(IngredientRepository ingredientRepository){
+
+    public IngredientByIdConverter(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
     }
 

@@ -15,6 +15,7 @@ spring:
       host: localhost
       port: 27017
       database: tacocloud
+      auto-index-creation: true
   datasource:
     url: jdbc:sqlserver://localhost:14033;databaseName=tacocloud;encrypt=false;
     username: sa
@@ -50,15 +51,15 @@ server:
     key-store-password: hoang92Taco
     key-password: hoang92Taco
     key-alias: tomcat
-logging:
-  level:
-    root: WARN
-    org:
-      springframework:
-        security: DEBUG
-  file:
-    name: taco-cloud.log
-    path: G:\WorkingPlace\taco_cloud\taco-cloud\logs
+# logging:
+#   level:
+#     root: WARN
+#     org:
+#       springframework:
+#         security: DEBUG
+#   file:
+#     name: taco-cloud.log
+#     path: G:\WorkingPlace\taco_cloud\taco-cloud\logs
 
 taco:
   orders:
