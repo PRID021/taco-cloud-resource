@@ -29,7 +29,7 @@ public class AppConfig implements CommandLineRunner {
     }
 
     @Bean
-    public  CommandLineRunner dataLoader(
+    public CommandLineRunner dataLoader(
             IngredientRepository repo,
             UserRepository userRepo,
             PasswordEncoder encoder,
@@ -38,9 +38,10 @@ public class AppConfig implements CommandLineRunner {
     ) {
         Iterable<Ingredient> ingredients = repo.findAll();
         if (ingredients.iterator().hasNext()) {
-            log.info("Ingredients already loaded");
-            log.warn("Perform delete {}", ingredients);
-            repo.deleteAll();
+            return null;
+            // log.info("Ingredients already loaded");
+            // log.warn("Perform delete {}", ingredients);
+            // repo.deleteAll();
         }
 
         return args -> {
