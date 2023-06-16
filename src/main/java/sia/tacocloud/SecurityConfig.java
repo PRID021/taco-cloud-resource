@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -43,6 +44,7 @@ public class SecurityConfig {
 
         return http
                 .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
                 .requestMatchers("/design", "/orders", "/").hasRole("USER")
                 .requestMatchers("/", "/**").permitAll()
                 .and()
@@ -67,6 +69,12 @@ public class SecurityConfig {
         return passwordEncoder;
     }
 
+
+    @Bean
+    public OrderAdminService orderAdminService(OrderRepository orderRepository) {
+        return orderRepository::deleteAll;
+    }
+
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepo) {
         return username -> {
@@ -80,9 +88,5 @@ public class SecurityConfig {
         };
     }
 
-    @Bean
-    public OrderAdminService orderAdminService(OrderRepository orderRepo) {
-        return orderRepo::deleteAll;
-    }
 
 }

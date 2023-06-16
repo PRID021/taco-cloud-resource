@@ -18,9 +18,9 @@ public class AdminController {
 
     @PostMapping("/deleteOrders")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String deleteOrders() {
+    public String deleteAllOrders() {
         orderAdminService.deleteAll();
         return "redirect:/admin";
     }
-    
+
 }

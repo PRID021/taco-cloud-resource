@@ -99,15 +99,15 @@ public class OrderController {
         return "redirect:/";
     }
 
-    @GetMapping
-    public String ordersForUser(@AuthenticationPrincipal TacoUser user, Model model) {
-        Pageable pageable = PageRequest.of(0, orderProps.getPageSize());
-        model.addAttribute("orders", orderRepository.findByUserOrderByPlacedAtDesc(user, pageable));
-        return "orderList";
-    }
+    // @GetMapping
+    // public String ordersForUser(@AuthenticationPrincipal TacoUser user, Model model) {
+    //     Pageable pageable = PageRequest.of(0, orderProps.getPageSize());
+    //     model.addAttribute("orders", orderRepository.findByTacoUserOrderByPlacedAtDesc(user, pageable));
+    //     return "orderList";
+    // }
 
     @PatchMapping(path = "/{orderId}", consumes = "application/json")
-    public TacoOrder putOrder(@PathVariable("orderId") String orderId, @RequestBody TacoOrder patch) {
+    public TacoOrder putOrder(@PathVariable("orderId") Long orderId, @RequestBody TacoOrder patch) {
         TacoOrder order = orderRepository.findById(orderId).get();
         if (patch.getDeliveryName() != null) {
             order.setDeliveryName(patch.getDeliveryName());
@@ -138,10 +138,10 @@ public class OrderController {
 
     @DeleteMapping("/{orderId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteOrder(@PathVariable("orderId") String orderId) {
+    public void deleteOrder(@PathVariable("orderId") Long orderId) {
         try {
             orderRepository.deleteById(orderId);
-        } catch (EmptyResultDataAccessException  e) {
+        } catch (EmptyResultDataAccessException e) {
             log.error("Error deleting order: {}", e.getMessage());
         }
     }
