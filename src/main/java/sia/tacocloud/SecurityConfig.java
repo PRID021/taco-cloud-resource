@@ -45,15 +45,17 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/ingredients/́́́**").permitAll()
                 .requestMatchers("/design", "/orders", "/").hasRole("USER")
                 .requestMatchers("/", "/**").permitAll()
                 .and()
                 .logout(logout -> logout.logoutSuccessUrl("/"))
                 .formLogin(login -> login.loginPage("/login")
-                        .loginProcessingUrl("/authenticate")
-                        .usernameParameter("username")
-                        .passwordParameter("password")
-                        .defaultSuccessUrl("/loginSuccess"))
+                .loginProcessingUrl("/authenticate")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/loginSuccess"))
+                .csrf().disable()
                 .build();
     }
 
@@ -68,7 +70,6 @@ public class SecurityConfig {
         PasswordEncoder passwordEncoder = new DelegatingPasswordEncoder(idForEncode, encoders);
         return passwordEncoder;
     }
-
 
     @Bean
     public OrderAdminService orderAdminService(OrderRepository orderRepository) {
@@ -87,6 +88,5 @@ public class SecurityConfig {
             throw new UsernameNotFoundException("User '" + username + "' not found");
         };
     }
-
 
 }

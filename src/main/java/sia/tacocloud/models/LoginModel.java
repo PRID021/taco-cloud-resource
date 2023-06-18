@@ -1,4 +1,4 @@
-package sia.tacocloud.controller;
+package sia.tacocloud.models;
 
 import lombok.Data;
 

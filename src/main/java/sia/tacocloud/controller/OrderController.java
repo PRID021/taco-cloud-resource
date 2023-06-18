@@ -3,6 +3,7 @@ package sia.tacocloud.controller;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -28,6 +30,7 @@ import jakarta.validation.Validator;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.ValidatorFactory;
+import jakarta.websocket.server.PathParam;
 import sia.tacocloud.AppConfig;
 import sia.tacocloud.OrderProps;
 import sia.tacocloud.models.TacoOrder;
@@ -60,6 +63,7 @@ public class OrderController {
         tacoOrder.setCcNumber(AppConfig.getCreditCard());
         tacoOrder.setDeliveryName(user.getFullname());
         return "orderForm";
+
     }
 
     /*
@@ -99,15 +103,23 @@ public class OrderController {
         return "redirect:/";
     }
 
-    // @GetMapping
-    // public String ordersForUser(@AuthenticationPrincipal TacoUser user, Model model) {
-    //     Pageable pageable = PageRequest.of(0, orderProps.getPageSize());
-    //     model.addAttribute("orders", orderRepository.findByTacoUserOrderByPlacedAtDesc(user, pageable));
-    //     return "orderList";
-    // }
+    @GetMapping
+    public String ordersForUser(@AuthenticationPrincipal TacoUser user, Model model) {
+        Pageable pageable = PageRequest.of(0, orderProps.getPageSize());
+
+        Iterable<TacoOrder> orders = orderRepository.findByDeliveryName(user.getFullname(), pageable);
+        model.addAttribute("orders", orders);
+        log.info("orders: {}", orders);
+        return "orderList";
+    }
+
+    @PutMapping(path = "/{orderId}", consumes = "application/json")
+    public TacoOrder putOrder(@PathParam("orderId") Long orderId, @RequestBody TacoOrder tacoOrder) {
+        return orderRepository.save(tacoOrder);
+    }
 
     @PatchMapping(path = "/{orderId}", consumes = "application/json")
-    public TacoOrder putOrder(@PathVariable("orderId") Long orderId, @RequestBody TacoOrder patch) {
+    public TacoOrder pathOrder(@PathVariable("orderId") Long orderId, @RequestBody TacoOrder patch) {
         TacoOrder order = orderRepository.findById(orderId).get();
         if (patch.getDeliveryName() != null) {
             order.setDeliveryName(patch.getDeliveryName());

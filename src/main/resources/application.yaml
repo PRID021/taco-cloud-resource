@@ -1,4 +1,7 @@
 spring:
+  data:
+    rest:
+      base-path: /data-api
   thymeleaf:
     cache: false
   output:
@@ -40,7 +43,6 @@ server:
     key-store-password: hoang92Taco
     key-password: hoang92Taco
     key-alias: tomcat
-
 
 taco:
   orders:
