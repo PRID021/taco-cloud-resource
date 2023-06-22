@@ -1,8 +1,6 @@
 package sia.tacocloud.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,10 +29,11 @@ public class IngredientController {
         return ingredientRepo.findAll();
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    // @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(consumes = "application/json")
     @ResponseStatus(code = org.springframework.http.HttpStatus.CREATED)
     public Ingredient postIngredient(@RequestBody Ingredient ingredient) {
+        log.info("Saving ingredient: " + ingredient);
         return ingredientRepo.save(ingredient);
     }
 

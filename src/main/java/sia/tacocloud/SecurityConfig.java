@@ -45,17 +45,19 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/api/ingredients/́́́**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/ingredients").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/api/ingredients").hasAuthority("SCOPE_deleteIngredients")
                 .requestMatchers("/design", "/orders", "/").hasRole("USER")
                 .requestMatchers("/", "/**").permitAll()
                 .and()
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt())
                 .logout(logout -> logout.logoutSuccessUrl("/"))
                 .formLogin(login -> login.loginPage("/login")
-                .loginProcessingUrl("/authenticate")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/loginSuccess"))
-                .csrf().disable()
+                        .loginProcessingUrl("/authenticate")
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("/loginSuccess"))
+                .csrf(csrf -> csrf.disable())
                 .build();
     }
 
