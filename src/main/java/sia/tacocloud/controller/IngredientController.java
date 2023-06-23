@@ -1,6 +1,7 @@
 package sia.tacocloud.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import sia.tacocloud.repositories.IngredientRepository;
 
 @RestController
 @RequestMapping(path = "api/ingredients", produces = "application/json")
+
 @Slf4j
 public class IngredientController {
     private IngredientRepository ingredientRepo;
@@ -24,6 +26,7 @@ public class IngredientController {
         this.ingredientRepo = ingredientRepo;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping
     public Iterable<Ingredient> allIngredients() {
         return ingredientRepo.findAll();
