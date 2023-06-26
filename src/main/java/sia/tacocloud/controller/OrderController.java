@@ -3,7 +3,6 @@ package sia.tacocloud.controller;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;

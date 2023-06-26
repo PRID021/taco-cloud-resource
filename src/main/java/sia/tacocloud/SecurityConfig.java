@@ -44,19 +44,21 @@ public class SecurityConfig {
 
         return http
                 .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.GET, "/api/ingredients").hasRole("SCOPE_writeIngredients")
                 .requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/api/ingredients").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/ingredients").hasAuthority("SCOPE_writeIngredients")
                 .requestMatchers(HttpMethod.DELETE, "/api/ingredients").hasAuthority("SCOPE_deleteIngredients")
                 .requestMatchers("/design", "/orders", "/").hasRole("USER")
                 .requestMatchers("/", "/**").permitAll()
                 .and()
+                .cors(cors -> cors.configurationSource(request -> {
+                    var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
+                    corsConfiguration.setAllowedOrigins(java.util.List.of("*"));
+                    corsConfiguration.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE"));
+                    corsConfiguration.setAllowedHeaders(java.util.List.of("*"));
+                    return corsConfiguration;
+                }))
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt())
-                .logout(logout -> logout.logoutSuccessUrl("/"))
-                .formLogin(login -> login.loginPage("/login")
-                        .loginProcessingUrl("/authenticate")
-                        .usernameParameter("username")
-                        .passwordParameter("password")
-                        .defaultSuccessUrl("/loginSuccess"))
                 .csrf(csrf -> csrf.disable())
                 .build();
     }

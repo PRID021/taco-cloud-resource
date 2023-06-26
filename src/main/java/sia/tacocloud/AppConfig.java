@@ -17,7 +17,6 @@ import sia.tacocloud.repositories.TacoRepository;
 import sia.tacocloud.repositories.UserRepository;
 import sia.tacocloud.utils.ConfigReader;
 
-@Slf4j
 @Configuration
 public class AppConfig implements CommandLineRunner {
     public static String getCreditCard() {
