@@ -40,6 +40,7 @@ public class SecurityConfig {
          * CSRF token to be sent with every request that could be processed by a
          * browser. If you’re using Thymeleaf, Spring Security automatically includes a
          * CSRF token in the model for any page that includes a form tag.
+         * 
          */
 
         return http
