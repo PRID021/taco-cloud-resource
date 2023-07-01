@@ -1,4 +1,4 @@
-package sia.tacocloud;
+package sia.tacocloud.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -49,7 +50,6 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/api/ingredients").hasAuthority("SCOPE_writeIngredients")
                 .requestMatchers(HttpMethod.DELETE, "/api/ingredients").hasAuthority("SCOPE_deleteIngredients")
-                .requestMatchers("/design", "/orders", "/").hasRole("USER")
                 .requestMatchers("/", "/**").permitAll()
                 .and()
                 .cors(cors -> cors.configurationSource(request -> {
@@ -63,6 +63,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .build();
     }
+
+       
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -83,6 +86,11 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepo) {
+
+        userRepo.findAll().forEach(user -> {
+            log.error("User: " + user);
+        });
+
         return username -> {
             log.error("Find user: " + username);
             TacoUser user = userRepo.findByUsername(username);
