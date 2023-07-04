@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -46,7 +45,7 @@ public class SecurityConfig {
 
         return http
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/api/ingredients").hasRole("SCOPE_writeIngredients")
+                .requestMatchers(HttpMethod.GET, "/api/ingredients").hasAuthority("SCOPE_writeIngredients")
                 .requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/api/ingredients").hasAuthority("SCOPE_writeIngredients")
                 .requestMatchers(HttpMethod.DELETE, "/api/ingredients").hasAuthority("SCOPE_deleteIngredients")
@@ -63,9 +62,6 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .build();
     }
-
-       
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
