@@ -27,6 +27,10 @@ public class TacoUserController {
         String username = authentication.getName();
         log.info("Username: " + username);
         TacoUser userDetails = userRepo.findByUsername(username);
+        if (userDetails == null) {
+            TacoUser newUser = new TacoUser(username, null, null, null, null, null, null, null);
+            userDetails = userRepo.save(newUser);
+        }
         log.info("User details: " + userDetails);
         return userDetails;
     }
