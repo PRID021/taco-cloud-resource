@@ -28,6 +28,7 @@ import sia.tacocloud.repositories.UserRepository;
 @Slf4j
 @EnableMethodSecurity
 public class SecurityConfig {
+    
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

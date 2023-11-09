@@ -1,5 +1,6 @@
 package sia.tacocloud.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,7 @@ import lombok.Data;
 @Data
 @Entity
 @RestResource(rel = "tacos", path = "tacos")
-public class Taco {
+public class Taco  implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

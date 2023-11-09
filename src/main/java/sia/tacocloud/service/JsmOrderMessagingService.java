@@ -10,7 +10,7 @@ import jakarta.jms.Session;
 import sia.tacocloud.models.TacoOrder;
 
 @Service
-public class JsmOrderMessagingService implements OtherMessagingService {
+public class JsmOrderMessagingService implements OrderMessagingService {
     private JmsTemplate template;
 
     public JsmOrderMessagingService(JmsTemplate jsm){

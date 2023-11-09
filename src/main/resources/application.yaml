@@ -4,6 +4,15 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:9000/oauth2/jwks
+
+  artemis:
+    broker-url: tcp://localhost:61616
+    user: hoang92Taco
+    password: hoang92Taco
+
+  jms:
+    template:
+      default-destination: tacocloud.order.queue
   data:
     rest:
       base-path: /data-api
@@ -35,10 +44,10 @@ spring:
   # create-drop: Similar to create, but it will drop the tables when the application shuts down.
   # update: Hibernate will update the existing tables if any changes are detected. It will not drop and recreate the tables.
   # validate: Hibernate will validate the tables' schema against the entity mappings,but it will not create or update the tables.
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+  # jpa:
+  #   hibernate:
+  #     ddl-auto: update
+  #   show-sql: true
 
 server:
   port: 4443
