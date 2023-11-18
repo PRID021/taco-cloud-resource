@@ -1,7 +1,8 @@
-FROM mcr.microsoft.com/mssql/server:2017-latest
+FROM mcr.microsoft.com/mssql/server:latest
 
+USER root
 # Create a config directory
-RUN mkdir -p /usr/config
+RUN  mkdir -p /usr/config
 WORKDIR /usr/config
 
 # Bundle config source

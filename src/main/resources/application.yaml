@@ -23,9 +23,10 @@ spring:
       enabled: always
 
   datasource:
-    url: jdbc:sqlserver://localhost:1434;databaseName=tacocloud;encrypt=false;
+    url: jdbc:sqlserver://localhost:1433;databaseName=tacocloud;encrypt=false;
     username: sa
     password: hoang92Taco
+    name: tacocloud
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
   # In Spring Data JPA, when you define a repository interface that extends CrudRepository or one of its sub-interfaces,
@@ -44,19 +45,19 @@ spring:
   # create-drop: Similar to create, but it will drop the tables when the application shuts down.
   # update: Hibernate will update the existing tables if any changes are detected. It will not drop and recreate the tables.
   # validate: Hibernate will validate the tables' schema against the entity mappings,but it will not create or update the tables.
-  # jpa:
-  #   hibernate:
-  #     ddl-auto: update
-  #   show-sql: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
 server:
   port: 4443
-  ssl:
-    enabled: false
-    key-store: file:///G:\WorkingPlace\taco_cloud\taco-cloud\mykeys.jks
-    key-store-password: hoang92Taco
-    key-password: hoang92Taco
-    key-alias: tomcat
+  # ssl:
+  #   enabled: false
+  #   key-store: file:///G:\WorkingPlace\taco_cloud\taco-cloud\mykeys.jks
+  #   key-store-password: hoang92Taco
+  #   key-password: hoang92Taco
+  #   key-alias: tomcat
 
 taco:
   orders:

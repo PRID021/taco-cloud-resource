@@ -9,4 +9,4 @@ services:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=hoang92Taco
     ports:
-      - 14033:1433
+      - 1433:1433
