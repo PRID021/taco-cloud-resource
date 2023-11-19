@@ -21,6 +21,7 @@ import sia.tacocloud.models.Ingredient.Type;
 import sia.tacocloud.models.Taco;
 import sia.tacocloud.models.TacoOrder;
 import sia.tacocloud.repositories.IngredientRepository;
+import sia.tacocloud.service.FileWriterGateway;
 
 @Slf4j
 @Controller
@@ -30,9 +31,11 @@ import sia.tacocloud.repositories.IngredientRepository;
 
 public class DesignTacoController {
     private final IngredientRepository ingredientRepository;
+    private FileWriterGateway fileWriterGateway;
 
-    public DesignTacoController(IngredientRepository ingredientRepository) {
+    public DesignTacoController(IngredientRepository ingredientRepository, FileWriterGateway fileWriterGateway) {
         this.ingredientRepository = ingredientRepository;
+        this.fileWriterGateway = fileWriterGateway;
     }
 
     @ModelAttribute
@@ -56,6 +59,8 @@ public class DesignTacoController {
 
     @GetMapping
     public String showDesignForm(Model model) {
+        log.info("showDesignForm have been call");
+        fileWriterGateway.writeToFileChannel("ingredients", "getAllIngredient");
         return "design";
     }
 

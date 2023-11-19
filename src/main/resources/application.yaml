@@ -62,3 +62,8 @@ server:
 taco:
   orders:
     pageSize: 20
+  file-writer:
+    inChannel: "textInChannel"
+    outChannel: "fileWriterChannel"
+    outDir: "/tmp/sia/files"
+

@@ -1,5 +1,22 @@
-{"properties": [{
-  "name": "taco.orders.page-size",
-  "type": "java.lang.Integer",
-  "description": "The number of orders to show per page"
-}]}
+{"properties": [
+  {
+    "name": "taco.orders.page-size",
+    "type": "java.lang.Integer",
+    "description": "The number of orders to show per page"
+  },
+  {
+    "name": "taco.file-writer.in-channel",
+    "type": "java.lang.String",
+    "description": "A description for 'taco.file-writer.in-channel'"
+  },
+  {
+    "name": "taco.file-writer.outChannel",
+    "type": "java.lang.String",
+    "description": "A description for 'taco.file-writer.outChannel'"
+  },
+  {
+    "name": "taco.file-writer.outDir",
+    "type": "java.lang.String",
+    "description": "A description for 'taco.file-writer.outDir'"
+  }
+]}
