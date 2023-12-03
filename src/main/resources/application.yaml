@@ -11,11 +11,11 @@ spring:
   #   password: hoang92Taco
   kafka:
 
-    bootstrap-servers: 192.168.1.14:9092     
+    bootstrap-servers: localhost:9092     
     consumer:
-      bootstrap-servers: 192.168.1.14:9092      
+      bootstrap-servers: localhost:9092      
     producer:
-      bootstrap-servers: 192.168.1.14:9092
+      bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: sia.tacocloud.config.JavaSerializer
 
@@ -35,7 +35,7 @@ spring:
       enabled: always
 
   datasource:
-    url: jdbc:sqlserver://localhost:14033;databaseName=tacocloud;encrypt=false;
+    url: jdbc:sqlserver://localhost:1433;databaseName=tacocloud;encrypt=false;
     username: sa
     password: hoang92Taco
     name: tacocloud
