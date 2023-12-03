@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "../kitchen"
+	},
+	{
+		"path": "../taco-authentication-server"
+	},
+	{
+		"path": "."
+	}
+],
+  "settings": {}
+}
