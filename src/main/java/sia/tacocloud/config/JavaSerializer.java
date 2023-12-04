@@ -7,12 +7,12 @@ import java.util.Map;
 
 import org.apache.kafka.common.serialization.Serializer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import sia.tacocloud.models.TacoOrder;
 
 public class JavaSerializer implements Serializer<TacoOrder> {
-
-
-
+     private final ObjectMapper objectMapper = new ObjectMapper();
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
 
@@ -26,12 +26,7 @@ public class JavaSerializer implements Serializer<TacoOrder> {
     @Override
     public byte[] serialize(String arg0, TacoOrder data) {
         try {
-            ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-            ObjectOutputStream objectStream = new ObjectOutputStream(byteStream);
-            objectStream.writeObject(data);
-            objectStream.flush();
-            objectStream.close();
-            return byteStream.toByteArray();
+            return objectMapper.writeValueAsBytes(data);
         }
         catch (IOException e) {
             throw new IllegalStateException("Can't serialize object: " + data, e);

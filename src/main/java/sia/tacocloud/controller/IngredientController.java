@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import sia.tacocloud.models.Ingredient;
 import sia.tacocloud.repositories.IngredientRepository;
-import sia.tacocloud.service.FileWriterGateway;
 
 @RestController
 @RequestMapping(path = "api/ingredients", produces = "application/json")
