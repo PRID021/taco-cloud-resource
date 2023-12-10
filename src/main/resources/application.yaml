@@ -35,7 +35,7 @@ spring:
       enabled: always
 
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=tacocloud;encrypt=false;
+    url: jdbc:sqlserver://localhost:14033;databaseName=tacocloud;encrypt=false;
     username: sa
     password: hoang92Taco
     name: tacocloud
